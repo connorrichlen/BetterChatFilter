@@ -121,12 +121,15 @@ namespace Oxide.Plugins
                 {
                     ClearOffense(player);
                 }
+                // figure out how to do this better but it works for now
+                // begin GUIAnnouncements compat - this is intended to mirror the function of SecureAdmin https://umod.org/plugins/secure-admin
                 String mutedPlayerFormat = player.Name;
                 String mutedPlayer = mutedPlayerFormat.ToString();
                 String reason = string.Format(GetLang("KickReason", null));
                 String formattedText = string.Format("{0} was muted with reason: {1}", mutedPlayer, reason);
-                server.Command("mute", player.Id, $"{TimeToMute}s", string.Format(GetLang("KickReason", null)));
                 GUIAnnouncements?.Call("CreateAnnouncement", formattedText, "Grey", "Yellow");
+                // end GUIAnnouncements compat
+                server.Command("mute", player.Id, $"{TimeToMute}s", string.Format(GetLang("KickReason", null)));
                 Mutes(player);
             }
             if (offenseCount >= KickCount && KickCount !=0)
