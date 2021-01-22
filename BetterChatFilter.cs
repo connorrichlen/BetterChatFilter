@@ -123,10 +123,8 @@ namespace Oxide.Plugins
                 }
                 // figure out how to do this better but it works for now
                 // begin GUIAnnouncements compat - this is intended to mirror the function inside GUIAnnouncements https://umod.org/plugins/gui-announcements
-                String mutedPlayerFormat = player.Name;
-                String mutedPlayer = mutedPlayerFormat.ToString();
                 String reason = string.Format(GetLang("KickReason", null));
-                String formattedText = string.Format("{0} was muted for {1}s with reason: {2}", mutedPlayer, TimeToMute, reason);
+                String formattedText = string.Format("{0} was muted for {1}s with reason: {2}", SanitizeName(player.Name), TimeToMute, reason);
                 GUIAnnouncements?.Call("CreateAnnouncement", formattedText, "Grey", "Yellow");
                 // end GUIAnnouncements compat
                 server.Command("mute", player.Id, $"{TimeToMute}s", string.Format(GetLang("KickReason", null)));
@@ -437,6 +435,19 @@ namespace Oxide.Plugins
         }
 
         #endregion
+
+        #region NameHelper
+
+        private string SanitizeName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+                return name;
+
+            return name.Replace("<", "‹").Replace(">", "›");
+        }
+
+        #endregion
+
 
         #region Convert Helper
 
