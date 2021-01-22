@@ -126,7 +126,7 @@ namespace Oxide.Plugins
                 String mutedPlayerFormat = player.Name;
                 String mutedPlayer = mutedPlayerFormat.ToString();
                 String reason = string.Format(GetLang("KickReason", null));
-                String formattedText = string.Format("{0} was muted with reason: {1}", mutedPlayer, reason);
+                String formattedText = string.Format("{0} was muted for {1}s with reason: {2}", mutedPlayer, TimeToMute, reason);
                 GUIAnnouncements?.Call("CreateAnnouncement", formattedText, "Grey", "Yellow");
                 // end GUIAnnouncements compat
                 server.Command("mute", player.Id, $"{TimeToMute}s", string.Format(GetLang("KickReason", null)));
