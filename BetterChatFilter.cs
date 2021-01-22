@@ -122,7 +122,7 @@ namespace Oxide.Plugins
                     ClearOffense(player);
                 }
                 // figure out how to do this better but it works for now
-                // begin GUIAnnouncements compat - this is intended to mirror the function of SecureAdmin https://umod.org/plugins/secure-admin
+                // begin GUIAnnouncements compat - this is intended to mirror the function inside GUIAnnouncements https://umod.org/plugins/gui-announcements
                 String mutedPlayerFormat = player.Name;
                 String mutedPlayer = mutedPlayerFormat.ToString();
                 String reason = string.Format(GetLang("KickReason", null));
